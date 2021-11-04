@@ -34,7 +34,6 @@ public class Memoria {
 	public void processarComando(String texto) {
 		
 		TipoComando tipoComando = detectarTipoComando(texto);
-		//System.out.println(tipoComando);
 		
 		if (tipoComando == null) {
 			return;
@@ -82,7 +81,9 @@ public class Memoria {
 		}else if (ultimaOperacao == TipoComando.MULT) {
 			resultado = numeroBuffer * numeroAtual;
 		}else if (ultimaOperacao == TipoComando.DIV) {
-			resultado = numeroBuffer / numeroAtual;
+			resultado = numeroBuffer / numeroAtual;	
+		}else if (ultimaOperacao == TipoComando.PERCENT) {
+			resultado = numeroBuffer / 100;
 		}
 		
 		String texto = Double.toString(resultado).replace(".",",");
@@ -117,6 +118,8 @@ public class Memoria {
 				return TipoComando.SUB;
 			} else if ("=".equals(texto)) {
 				return TipoComando.IGUAL;
+			} else if ("%".equals(texto)) {
+				return TipoComando.PERCENT;
 			} else if ("±".equals(texto)) {
 				return TipoComando.INVERTER;
 			} else if (",".equals(texto) && !textoAtual.contains(",")) {
